@@ -28,17 +28,23 @@ app.use('/api/note',noteRoutes)
 app.get('/', (req, res) => {
   res.send('Hello World');
 });
+app.get('/test', (req, res) => {
+  res.json({ message: "API is working!" });
+});
+
 
 app.use((err, req, res, next) => {
   const statusCode = err.status || 500;
   const message = err.message || "Internal server error";
-
+  console.error('Error stack:', err.stack); 
+  
   return res.status(statusCode).json({
     success: false,
     statusCode,
     message
   });
 });
+
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
