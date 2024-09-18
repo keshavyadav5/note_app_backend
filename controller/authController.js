@@ -52,7 +52,7 @@ const login = async (req, res, next) => {
 
     res.cookie("access_token", token, { 
       httpOnly: true, 
-      sameSite: "Strict",
+      sameSite: "Lax",
     }).status(200).json({
       success: true,
       message: "Login successful",
