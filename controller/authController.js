@@ -38,12 +38,12 @@ const login = async (req, res, next) => {
   try {
     const user = await User.findOne({ email });
     if (!user) {
-      return next(errorHandler(400, "Invalid email or password"));
+      return res.status(400).json(errorHandler(400, "Invalid email or password"));
     }
 
     const isValidPassword = await bcrypt.compare(password, user.password);
     if (!isValidPassword) {
-      return next(errorHandler(400, "Invalid email or password"));
+      return res.status(400).json(errorHandler(400, "Invalid email or password"));
     }
 
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "1h" });
@@ -59,9 +59,10 @@ const login = async (req, res, next) => {
       userData
     });
   } catch (error) {
-    next(error);
+    res.status(500).json(error);
   }
 };
+
 
 const logout = async (req, res, next) => {
   try {
