@@ -15,9 +15,13 @@ app.use(cors({
   allowedHeaders: ['Content-Type', 'Authorization'],
 }));
 
-
-
-app.use(express.json());
+app.use(express.static('public', {
+    setHeaders: (res, path) => {
+        if (path.endsWith('.js')) {
+            res.setHeader('Content-Type', 'application/javascript');
+        }
+    }
+}));
 
 
 const authRoutes = require('./routes/authRoutes');
