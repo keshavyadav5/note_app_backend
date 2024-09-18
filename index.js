@@ -9,7 +9,7 @@ const cors = require('cors');
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(cors({
-  origin: 'https://note-app-frontend-4agg.onrender.com',
+  origin: 'https://note-app-frontend-seven.vercel.app',
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
